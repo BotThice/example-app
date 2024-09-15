@@ -140,4 +140,35 @@ class DiaryEntryController extends Controller
             ->get();
         return response()->json(['diary_count' => $diary_count]);
     }
+
+    public function conflictDiary()
+    {
+        $userId = Auth::id();
+        $conflictDiary = DB::table('diary_entries')
+            ->join('diary_entry_emotions', 'diary_entries.id', '=', 'diary_entry_emotions.diary_entry_id')
+            ->join('emotions', 'emotions.id', '=', 'diary_entry_emotions.emotion_id')
+            ->where('user_id', $userId)
+            ->where('content', 'LIKE', '%happy%')
+            ->whereIn('emotion_id', [2, 3, 5])
+            ->select('diary_entries.id', 'date', 'content', 'name', 'intensity')
+            ->get();
+
+        return view('diary.show-conflict', compact('conflictDiary'));
+    }
+
+    public function conflictDiaryJSON()
+    {
+        $userId = Auth::id();
+        $conflictDiary = DB::table('diary_entries')
+            ->join('diary_entry_emotions', 'diary_entries.id', '=', 'diary_entry_emotions.diary_entry_id')
+            ->join('emotions', 'emotions.id', '=', 'diary_entry_emotions.emotion_id')
+            ->where('user_id', $userId)
+            ->where('content', 'LIKE', '%happy%')
+            ->whereIn('emotion_id', [2, 3, 5])
+            ->select('diary_entries.id', 'date', 'content', 'name', 'intensity')
+            ->get();
+
+
+        return response()->json(['diary.conflictJSON' => ($conflictDiary)]);
+    }
 }

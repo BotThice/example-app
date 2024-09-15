@@ -14,7 +14,7 @@
                     bordertransparent rounded-md font-semibold text-xs text-white uppercase
                     tracking-widest hover:bg-blue-500 active:bg-blue-700 focus:outlinenone 
                     focus:border-blue-700 focus:ring ring-blue-300 disabled:opacity25 transition ease-in-out duration-150 mb-4">
-                        {{ __('Add New Entry') }}
+                        {{ __('Add New Diary') }}
                     </a>
                     <div class="py-8">
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">

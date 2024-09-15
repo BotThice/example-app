@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DiaryEntryController;
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -34,7 +35,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/display_diary', [DiaryEntryController::class,'display_diary'])->name('diary.display_diary');
     Route::get('/diary_count', [DiaryEntryController::class,'diary_count'])->name('diary.diary_count');
     
-    Route::get('/profile/personality', [UserController::class, 'showPersonality'])->name('profile.show-personality)');
+    Route::get('/profile/personality', [UserController::class, 'showPersonality'])->name('profile.show-personality');
+
+    Route::get('/conflict_diary', [DiaryEntryController::class, 'conflictDiary'])->name('diary.show-conflict');
+    Route::get('/conflictJSON', [DiaryEntryController::class, 'conflictDiaryJSON'])->name('diary.conflictJSON');
 
    }
 );
